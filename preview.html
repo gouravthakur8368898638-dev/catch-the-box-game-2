@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catch the Box Game</title>
+<style>
+  body {
+    background: #101827;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+  }
+  #game {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 350px;
+    margin: 20px auto;
+    background: #1f2c40;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  #box {
+    display: none;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #facc15;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 30px;
+  }
+  button#start {
+    background: #facc15;
+    padding: 12px 30px;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+<h1>Catch the Box 🎮</h1>
+<h2>Score: <span id="score">0</span></h2>
+
+<div id="game">
+  <button id="box">⭐</button>
+</div>
+
+<button id="start">Start Game</button>
+
+<script>
+const box = document.getElementById("box");
+const game = document.getElementById("game");
+const scoreText = document.getElementById("score");
+const start = document.getElementById("start");
+
+let score = 0;
+
+function moveBox() {
+  const maxX = game.clientWidth - box.offsetWidth;
+  const maxY = game.clientHeight - box.offsetHeight;
+
+  box.style.left = Math.random() * maxX + "px";
+  box.style.top = Math.random() * maxY + "px";
+}
+
+start.onclick = function() {
+  score = 0;
+  scoreText.textContent = score;
+  box.style.display = "block";
+  moveBox();
+};
+
+box.onclick = function() {
+  score++;
+  scoreText.textContent = score;
+  moveBox();
+};
+</script>
+
+</body>
+</html>
